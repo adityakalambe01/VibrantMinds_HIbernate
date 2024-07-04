@@ -19,6 +19,6 @@
         <property name="hibernate.format_sql">true</property>
 
 
-        <mapping resource="Student.hbm.xml"/>
+        <mapping resource="day01/Student.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

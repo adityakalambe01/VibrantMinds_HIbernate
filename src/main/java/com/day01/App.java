@@ -1,12 +1,8 @@
-package com;
+package com.day01;
 
 
-import com.dao.StudentDao;
-import com.model.Student;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import com.day01.dao.StudentDao;
+import com.day01.model.Student;
 
 /**
  * Hello world!

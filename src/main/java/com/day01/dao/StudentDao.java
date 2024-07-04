@@ -1,6 +1,6 @@
-package com.dao;
+package com.day01.dao;
 
-import com.model.Student;
+import com.day01.model.Student;
 import org.hibernate.Transaction;
 
 public class StudentDao {

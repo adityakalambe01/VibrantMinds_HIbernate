@@ -1,4 +1,4 @@
-package com.model;
+package com.day01.model;
 
 public class Student {
     private int id;
