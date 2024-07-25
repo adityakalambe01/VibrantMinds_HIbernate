@@ -15,11 +15,10 @@ public class Gift {
     @GeneratedValue
     private int giftId;
 
+    @Column(name = "name")
     private String giftName;
 
-    private String giftCategory;
-
-/*    @ManyToOne
-    private Student studentId;*/
-
+    @ManyToOne
+    @ToString.Exclude
+    private Student student;
 }

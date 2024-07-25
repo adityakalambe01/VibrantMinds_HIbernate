@@ -14,19 +14,28 @@ import java.util.List;
 @Table(name = "relationship_student")
 public class Student {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentId;
 
+    @Column(name = "name")
     private String studentName;
 
+    @Column(name = "ph_no")
     private long mobileNumber;
 
+    @Column(name = "email")
     private String email;
 
     @OneToOne
     @ToString.Exclude
     private Laptop laptop;
 
-/*    @ManyToOne
-    private List<Gift> giftList = new LinkedList<>();*/
+    @ToString.Exclude
+    @OneToMany(mappedBy="student")
+    private List<Gift> giftList = new LinkedList<>();
+
+    @ManyToOne
+    @ToString.Exclude
+    private Course course;
 }

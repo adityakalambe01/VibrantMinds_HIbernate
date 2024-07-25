@@ -16,6 +16,7 @@ public class Laptop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int laptopId;
 
+    @Column(name = "name")
     private String laptopName;
 
     @Column(columnDefinition = "double(8,2) default 30000.36")
