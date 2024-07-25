@@ -1,0 +1,13 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.practice.entity.Employee">
+        <id name="employeeId" type="int">
+            <generator class="identity"></generator>
+        </id>
+        <property name="employeeName" type="java.lang.String"/>
+        <property name="employeeDesignation" type="java.lang.String"/>
+        <property name="employeeSalary" type="double"/>
+    </class>
+</hibernate-mapping>

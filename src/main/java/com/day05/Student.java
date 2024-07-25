@@ -24,5 +24,5 @@ public class Student {
     private String collegeName;
 
     @Column(name = "percentage")
-    private double studentPercentage;
+    private int studentPercentage;
 }

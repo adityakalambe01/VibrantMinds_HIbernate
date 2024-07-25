@@ -3,6 +3,8 @@ package com.day05;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Arrays;
@@ -29,7 +31,7 @@ public class CriteriaMain {
             Student student = new Student();
             student.setStudentName(studentName.toString());
             student.setCollegeName(collegeName.toString());
-            student.setStudentPercentage(new Random().nextDouble()*100);
+            student.setStudentPercentage(new Random().nextInt(100));
             session.save(student);
             session.beginTransaction().commit();
 
@@ -120,6 +122,54 @@ public class CriteriaMain {
                 ).list()
                 .forEach(System.out::println);
     }
+
+    //
+    public static List<Integer> distinctPercentage(Session session){
+        List<Integer> percentageList = session.createCriteria(Student.class)
+                .setProjection(
+                        Projections.distinct(
+                                Projections.property("studentPercentage")
+                        )
+                )
+                .addOrder(
+                        Order.asc("studentPercentage")
+                ).list();
+        return percentageList;
+    }
+
+    public static void getNthPercentageStudent(Session session, int n){
+        System.out.println(
+                session.createCriteria(Student.class)
+                        .add(
+                                Restrictions.eq(
+                                        "studentPercentage", distinctPercentage(session).get(distinctPercentage(session).size()-n)
+                                )
+                        ).setMaxResults(1)
+                        .uniqueResult()
+        );
+    }
+
+    public static void getNthHighestPercentageStudentBySubQuery(Session session, int n){
+        session.createCriteria(Student.class)
+                .add(
+                        Restrictions.eq(
+                                "studentPercentage",
+                                session.createCriteria(Student.class)
+                                        .setProjection(
+                                                Projections.distinct(
+                                                        Projections.property("studentPercentage")
+                                                )
+                                        )
+                                        .addOrder(
+                                                Order.desc("studentPercentage")
+                                        ).list()
+                                        .get(n-1)
+                        )
+                ).list()
+                .forEach(System.out::println);
+    }
+
+
     public static void main(String[] args) {
 
 //        addStudents(session);
@@ -141,6 +191,15 @@ public class CriteriaMain {
 
 //        nameContains(session, "XSCBISQW");
 
-        orderByName(session);
+//        orderByName(session);
+
+//        distinctPercentage(session);
+//        getNthPercentageStudent(session, 1);
+
+//        for (int i = 1; i <= 3; i++) {
+//            getNthHighestPercentageStudentBySubQuery(session, i);
+//        }
+
+        getNthHighestPercentageStudentBySubQuery(session, 1);
     }
 }
